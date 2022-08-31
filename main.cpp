@@ -57,31 +57,36 @@ bool findRun(const string a[], int n, string target, int& begin, int& end)
 				// iterates until it finds something that's not the target
 				if (a[j] != target) 
 				{
-					end = j - 1;
-						// to show that the end isn't the same as the beginning
-					it2++; 
-					break;
+					if (j == i + 1)
+					{
+						end = begin;
+						it = 0;
+						break;
+					}
+					else
+					{
+						end = j - 1;
+							// to show that the end isn't the same as the beginning
+						it2++;
+						break;
+					}
 				}
 			}
-		}
-			// a second instance of target won't be found, so it2 would be 0
-		if (it2 == 0) 		
-			end = begin;		
+		}		
 	}
 		// will be true if any target is found
-	if (it >= 1) 	
+	if (it >= 1 && it2 != 0) 	
 		return true;	
 	return false;
 }
 
 int findMin(const string a[], int n) 
 {
-	int j = -1;
-	size_t i;
+	int j = 0;
 		// initialize min to be first element
 	string min = a[0];
 		// go through array and compare values to min
-	for (i = 1; i < n; i++) 
+	for (size_t i = 1; i < n; i++) 
 	{
 		if (a[i] < min) 
 		{
@@ -279,36 +284,7 @@ int makeMerger(const string a1[], int n1, const string a2[], int n2, string resu
 	return n3;
 }
 
-int divide(string a[], int n, string divider) 
-{
-	string temp = "";
-	for (size_t i = 0; i < n; i++) 
-	{
-		for (size_t j = i; j < n; j++)
-		{
-				// for each value of i, check through whole array
-				// see if any elements should be swapped, and swap if so
-			if (a[i] >= divider && a[j] < divider) 
-			{
-				temp = a[i];
-				a[i] = a[j];
-				a[j] = temp;
-			}
-		}
-	}
-		// find first place that element is greater than divider
-	for (size_t i = 0; i < n; i++) 
-	{
-		if (a[i] > divider) 
-			return i;
-	}
-		// if no value is greater than divider, return number of elements
-	return n;
-}
-
-
 int main() 
 {
-	string a[5] = { "alpha", "beta", "omega", "gamma", "delta" };
-	string b[5] = { "zeta", "alpha", "beta", "epsilon", "pi" };
+	
 }
